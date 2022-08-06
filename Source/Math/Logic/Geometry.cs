@@ -4,8 +4,8 @@ namespace SpiralCircus.Math
 {
     public static class Geometry
     {
-        private static readonly List<Vector2> _lowerHull = new();
-        private static readonly List<Vector2> _upperHull = new();
+        private static readonly List<Vector2> _lowerHull = new List<Vector2>();
+        private static readonly List<Vector2> _upperHull = new List<Vector2>();
 
         public static Rect GetCameraFrustum(Vector2 position, float cameraZ, float targetZ, float fov,
             float aspect = 16f / 9f)
@@ -74,7 +74,7 @@ namespace SpiralCircus.Math
                 // WHILE the lower hull contains at least two points
                 // AND the sequence of last two points and the point P[i] does not make a counter-clockwise turn
                 // REMOVE the last point from L
-                while (_lowerHull.Count >= 2 && Vector2.Cross(_lowerHull[^2], _lowerHull[^1], point) <= 0)
+                while (_lowerHull.Count >= 2 && Vector2.Cross(_lowerHull[_lowerHull.Count-1], _lowerHull[_lowerHull.Count-1], point) <= 0)
                     _lowerHull.RemoveAt(_lowerHull.Count - 1);
                 // add the current point to L
                 _lowerHull.Add(point);
@@ -89,7 +89,7 @@ namespace SpiralCircus.Math
                 // AND the sequence of last two points and the point P[i] does not make a counter-clockwise turn
                 // REMOVE the last point from L
                 while (_upperHull.Count >= 2 &&
-                       Vector2.Cross(_upperHull[^2], _upperHull[^1], point) <= 0)
+                       Vector2.Cross(_upperHull[_upperHull.Count-1], _upperHull[_upperHull.Count-1], point) <= 0)
                     _upperHull.RemoveAt(_upperHull.Count - 1);
                 _upperHull.Add(point);
             }

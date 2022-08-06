@@ -6,7 +6,7 @@ namespace SpiralCircus.Math
     public static class Randomisation
     {
         [ThreadStatic] private static Random _rng;
-        private static Random Rng => _rng ??= new Random();
+        private static Random Rng => _rng ?? (_rng = new Random());
 
         public static float RandomFloat(float lowerBound, float upperBound)
         {

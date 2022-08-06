@@ -369,7 +369,7 @@ namespace SpiralCircus.Math
         public override bool Equals(object other)
         {
             bool result;
-            if (other is not Vector2 vector2D)
+            if (!(other is Vector2 vector2D))
                 result = false;
             else
                 result = x.Equals(vector2D.x) && y.Equals(vector2D.y);
@@ -383,15 +383,15 @@ namespace SpiralCircus.Math
 
         #region STANDARD VALUES
 
-        public static Vector2 Zero { get; } = new(0f, 0f);
-        public static Vector2 One { get; } = new(1f, 1f);
-        public static Vector2 Up { get; } = new(0f, 1f);
-        public static Vector2 Down { get; } = new(0f, -1f);
-        public static Vector2 Left { get; } = new(-1f, 0f);
-        public static Vector2 Right { get; } = new(1f, 0f);
-        public static Vector2 PositiveInfinity { get; } = new(float.PositiveInfinity, float.PositiveInfinity);
-        public static Vector2 NegativeInfinity { get; } = new(float.NegativeInfinity, float.NegativeInfinity);
-        public static Vector2 Epsilon { get; } = new(KEpsilon, KEpsilon);
+        public static Vector2 Zero { get; } = new Vector2(0f, 0f);
+        public static Vector2 One { get; } = new Vector2(1f, 1f);
+        public static Vector2 Up { get; } = new Vector2(0f, 1f);
+        public static Vector2 Down { get; } = new Vector2(0f, -1f);
+        public static Vector2 Left { get; } = new Vector2(-1f, 0f);
+        public static Vector2 Right { get; } = new Vector2(1f, 0f);
+        public static Vector2 PositiveInfinity { get; } = new Vector2(float.PositiveInfinity, float.PositiveInfinity);
+        public static Vector2 NegativeInfinity { get; } = new Vector2(float.NegativeInfinity, float.NegativeInfinity);
+        public static Vector2 Epsilon { get; } = new Vector2(KEpsilon, KEpsilon);
 
         #endregion
 
