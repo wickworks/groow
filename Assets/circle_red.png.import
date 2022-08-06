@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Coda.png-52ab3dff5547446a8a1426e6958a7351.stex"
+path="res://.import/circle_red.png-bcaf8b141abee08d23ff8837ea5f1e2e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Coda.png"
-dest_files=[ "res://.import/Coda.png-52ab3dff5547446a8a1426e6958a7351.stex" ]
+source_file="res://Assets/circle_red.png"
+dest_files=[ "res://.import/circle_red.png-bcaf8b141abee08d23ff8837ea5f1e2e.stex" ]
 
 [params]
 
