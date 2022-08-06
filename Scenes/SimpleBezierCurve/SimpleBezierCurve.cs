@@ -6,18 +6,6 @@ public class SimpleBezierCurve : Node2D
 	[Export] private Color curveColor = new Color(0.5f, 0.5f, 0.5f);
 	[Export] private float curveWidth = 2;
 	
-	// [Export] private Color pointAColor = new Color(1, 0, 0);
-	// [Export] private Color pointBColor = new Color(0, 1, 0);
-	
-	// [Export] private float pointRadius = 10;
-	// [Export] private float handleRadius = 5;
-	// [Export] private float handleLineWidth = 0.5f;
-	
-	// private Position2D _pointA;
-	// private Position2D _handleA;
-	// private Position2D _pointB;
-	// private Position2D _handleB;
-	
 	private Position2D _pointA;
 	private Position2D _pointB;
 
@@ -42,14 +30,23 @@ public class SimpleBezierCurve : Node2D
 		
 		// add these points to the curve
 		
-		_curve.AddPoint(pointA, -handleA, handleA);
+		_curve.AddPoint(pointA, handleA, -handleA);
 		_curve.AddPoint(pointB, handleB, -handleB);
+	}
+	
+	private void UpdatePoint(int idx, Position2D point)
+	{
+		var handle = point.GetNode<Position2D>("Handle");
+	
+		_curve.SetPointPosition(idx, point.Position);
+		_curve.SetPointIn(idx, handle.Position);
+		_curve.SetPointOut(idx, -handle.Position);
+		
+		Update();
 	}
 	
 	public override void _Process(float delta)
 	{
-		//var mouse_pos = GetViewport().GetMousePosition();
-		//_curve.SetPointPosition(0, mouse_pos);
 		//Update();
 	}
 
@@ -60,12 +57,19 @@ public class SimpleBezierCurve : Node2D
 		for (int i = 0; i < points.Length - 1; i++) 
 			DrawLine(points[i], points[i + 1], curveColor, curveWidth, true);
 
-		// draw control points and handles and stuff
-		// DrawLine(_pointA.Position, _pointA.Position + _handleA.Position, pointAColor, handleLineWidth, true);
-		// DrawLine(_pointB.Position, _pointB.Position + _handleB.Position, pointBColor, handleLineWidth, true);
-		// DrawCircle(_pointA.Position, pointRadius, pointAColor);
-		// DrawCircle(_pointB.Position, pointRadius, pointBColor);
-		// DrawCircle(_pointA.Position + _handleA.Position, handleRadius, pointAColor);
-		// DrawCircle(_pointB.Position + _handleB.Position, handleRadius, pointBColor);
+	}
+	
+	private void _on_PointA_updatedPointOrHandle()
+	{
+		UpdatePoint(0, GetNode<Position2D>("PointA"));
+	}
+
+
+	private void _on_PointB_updatedPointOrHandle()
+	{
+		UpdatePoint(1, GetNode<Position2D>("PointB"));
 	}
 }
+
+
+

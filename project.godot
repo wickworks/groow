@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Position2D",
+"class": "BezierPoint",
+"language": "GDScript",
+"path": "res://Scenes/BezierPoint/BezierPoint.gd"
+} ]
+_global_script_class_icons={
+"BezierPoint": ""
+}
+
 [application]
 
 config/name="Groow"

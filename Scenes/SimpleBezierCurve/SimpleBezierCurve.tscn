@@ -13,3 +13,6 @@ startingHandle = Vector2( 50, -50 )
 [node name="PointB" parent="." instance=ExtResource( 2 )]
 position = Vector2( 39, 88 )
 startingHandle = Vector2( -50, 50 )
+
+[connection signal="updatedPointOrHandle" from="PointA" to="." method="_on_PointA_updatedPointOrHandle"]
+[connection signal="updatedPointOrHandle" from="PointB" to="." method="_on_PointB_updatedPointOrHandle"]
