@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SpiralCircus.Math
+namespace Grow.Math
 {
     public static class Randomisation
     {

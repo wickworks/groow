@@ -1,4 +1,4 @@
-﻿namespace SpiralCircus.Math
+﻿namespace Grow.Math
 {
     public static class Maths
     {

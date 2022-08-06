@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpiralCircus.Math
+namespace Grow.Math
 {
     [Serializable]
     public struct BezierPoint
