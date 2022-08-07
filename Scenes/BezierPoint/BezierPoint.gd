@@ -3,6 +3,7 @@ extends Position2D
 class_name BezierPoint
 
 export var startingHandle = Vector2.ZERO
+export var indexInCurve = 0
 
 signal updatedPointOrHandle
 
@@ -11,7 +12,8 @@ var draggingHandle = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Handle.position = startingHandle
+	if $Handle.position == Vector2.ZERO:
+		$Handle.position = startingHandle
 	updateLine()	
 
 func setPositionAndHandle(selfPos, handlePos):
@@ -24,22 +26,23 @@ func updateLine():
 	$HandleLine.add_point(Vector2.ZERO)
 	$HandleLine.add_point($Handle.position)
 	
-	emit_signal("updatedPointOrHandle")
+	emit_signal("updatedPointOrHandle", indexInCurve)
 	
 	update()
-	
+
+func setIndex(idx):
+	indexInCurve = idx
+
 func _process(delta):
 	var mousePos = get_global_mouse_position()
 	
-	if draggingPoint:
-		position = mousePos
-		updateLine()	
-		
 	if draggingHandle:
 		$Handle.position = mousePos - position
 		updateLine()	
-
-
+	elif draggingPoint:
+		position = mousePos
+		updateLine()	
+		
 func _input(event):
 	if (event is InputEventMouseButton && !event.pressed):
 		draggingPoint = false
@@ -48,9 +51,7 @@ func _input(event):
 func _on_PointArea_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
 		draggingPoint = true
-		print("click point")
 
 func _on_HandleArea_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton && event.pressed):
 		draggingHandle = true
-		print("click handle")

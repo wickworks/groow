@@ -20,8 +20,12 @@ public class LongBezierCurve : Node2D
 	{
 		var handle = point.GetNode<Position2D>("Handle");
 		_curve.AddPoint(point.Position, handle.Position, -handle.Position);
+
+		point.Call("setIndex", _points.Count);
 		_points.Add(point);
 		AddChild(point);
+		
+		point.Connect("updatedPointOrHandle", this, "UpdatePoint");
 		
 		Update();
 	}
@@ -52,11 +56,6 @@ public class LongBezierCurve : Node2D
 			DrawLine(points[i], points[i + 1], curveColor, curveWidth, true);
 
 	}
-	
-	// private void _on_PointA_updatedPointOrHandle()
-	// {
-	// 	UpdatePoint(0, GetNode<Position2D>("PointA"));
-	// }
 
 }
 
