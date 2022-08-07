@@ -38,20 +38,18 @@ func _process(delta):
 	
 	if draggingHandle:
 		$Handle.position = mousePos - position
-		updateLine()	
+		updateLine()
 	elif draggingPoint:
 		position = mousePos
-		updateLine()	
+		updateLine()
 		
 func _input(event):
 	if (event is InputEventMouseButton && !event.pressed):
 		draggingPoint = false
 		draggingHandle = false
 
-func _on_PointArea_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseButton && event.pressed):
-		draggingPoint = true
+func _on_HandleButton_button_down():
+	draggingHandle = true
 
-func _on_HandleArea_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseButton && event.pressed):
-		draggingHandle = true
+func _on_PointButton_button_down():
+	draggingPoint = true

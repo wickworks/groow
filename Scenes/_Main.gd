@@ -11,9 +11,11 @@ func _ready():
 func _unhandled_input(event):
 	if (event is InputEventMouseButton && event.pressed):
 		var mousePos = get_global_mouse_position()
-		AddPoint(mousePos, Vector2.ZERO)
+		var point = AddPoint(mousePos, Vector2.ZERO)
+		point.draggingHandle = true
 
 func AddPoint(pointPos, handlePos):
 	var point = BezierPointScene.instance()
 	point.setPositionAndHandle(pointPos, handlePos)
 	$LongBezierCurve.AddPoint(point)
+	return point
