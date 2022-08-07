@@ -12,7 +12,7 @@ func _unhandled_input(event):
 	if (event is InputEventMouseButton && event.pressed && event.button_index == BUTTON_LEFT):
 		var mousePos = get_global_mouse_position()
 		var point = AddPoint(mousePos, Vector2.ZERO)
-		point.draggingHandle = true
+		point.draggingHandleMirror = true
 
 func AddPoint(pointPos, handlePos):
 	var point = BezierPointScene.instance()
