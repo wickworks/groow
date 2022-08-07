@@ -8,7 +8,7 @@
 script = ExtResource( 1 )
 
 [node name="HandleLine" type="Line2D" parent="."]
-width = 2.0
+width = 1.0
 
 [node name="PointButton" type="Button" parent="."]
 anchor_left = 0.5
