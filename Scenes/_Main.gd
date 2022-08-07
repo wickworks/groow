@@ -8,6 +8,11 @@ func _ready():
 	AddPoint(Vector2(80,80), Vector2(-100,-40))
 	AddPoint(Vector2(-80,160), Vector2(-40,40))
 
+func _unhandled_input(event):
+	if (event is InputEventMouseButton && event.pressed):
+		var mousePos = get_global_mouse_position()
+		AddPoint(mousePos, Vector2.ZERO)
+
 func AddPoint(pointPos, handlePos):
 	var point = BezierPointScene.instance()
 	point.setPositionAndHandle(pointPos, handlePos)
