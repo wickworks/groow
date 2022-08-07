@@ -14,6 +14,11 @@ func _ready():
 	$Handle.position = startingHandle
 	updateLine()	
 
+func setPositionAndHandle(selfPos, handlePos):
+	set_position(selfPos)
+	$Handle.set_position(handlePos)
+	updateLine()	
+
 func updateLine():
 	$HandleLine.points = Array()
 	$HandleLine.add_point(Vector2.ZERO)
