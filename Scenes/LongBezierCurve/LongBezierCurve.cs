@@ -6,6 +6,7 @@ public class LongBezierCurve : Node2D
 {
 	[Export] private Color curveColor = new Color(0.5f, 0.5f, 0.5f);
 	[Export] private float curveWidth = 2;
+	[Export] private float swayAmplitude = 10f;
 	
 	private readonly List<Position2D> _points = new List<Position2D>();
 
@@ -28,7 +29,7 @@ public class LongBezierCurve : Node2D
 		point.Connect("updatedPointOrHandle", this, "UpdatePoint");
 		point.Connect("deletePoint", this, "DeletePoint");
 		
-		Update();
+		//Update();
 	}
 	
 	
@@ -41,7 +42,7 @@ public class LongBezierCurve : Node2D
 		_curve.SetPointIn(idx, handle.Position);
 		_curve.SetPointOut(idx, -handle.Position);
 		
-		Update();
+		//Update();
 	}
 	
 	private void DeletePoint(int idx)
@@ -52,16 +53,29 @@ public class LongBezierCurve : Node2D
 		// Need to tell all the points what their new index is.
 		for (int i = 0; i < _points.Count; i++) 
 		{
-			GD.Print(i);
 			_points[i].Call("setIndex", i);
 		}
 		
-		Update();
+		//Update();
 	}
 	
 	public override void _Process(float delta)
 	{
-		//Update();
+		// Apply an animation to all the points
+		var animTimer = GetNode<Timer>("AnimationTimer");
+		
+		for (int i = 1; i < _points.Count-1; i++) 
+		{
+			var point = _points[i];
+			var position = point.Position;
+			var tween = (float) ((animTimer.TimeLeft + i*4f) / animTimer.WaitTime);
+			var offset = Math.Sin(360f * tween) * swayAmplitude;
+			_curve.SetPointPosition(i, new Vector2((float) position.x + (float) offset, position.y));
+			//_curve.SetPointIn(i, handle.Position);
+			//_curve.SetPointOut(i, -handle.Position);
+		}
+		
+		Update();
 	}
 
 	public override void _Draw()

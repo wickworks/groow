@@ -6,3 +6,7 @@
 script = ExtResource( 1 )
 curveColor = Color( 0.176471, 0.615686, 0, 1 )
 curveWidth = 7.0
+
+[node name="AnimationTimer" type="Timer" parent="."]
+wait_time = 120.0
+autostart = true
