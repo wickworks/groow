@@ -4,9 +4,9 @@ var BezierPointScene = preload("res://Scenes/BezierPoint/BezierPoint.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	AddPoint(Vector2(0,0), Vector2(20,-20))
-	AddPoint(Vector2(80,80), Vector2(-100,-40))
 	AddPoint(Vector2(-80,160), Vector2(-40,40))
+	AddPoint(Vector2(80,80), Vector2(-100,-40))
+	AddPoint(Vector2(0,0), Vector2(20,-20))
 
 func _unhandled_input(event):
 	if (event is InputEventMouseButton && event.pressed):
