@@ -65,6 +65,6 @@ position = Vector2( 10, 10 )
 scale = Vector2( 0.1875, 0.1875 )
 texture = ExtResource( 3 )
 
-[connection signal="button_down" from="PointButton" to="." method="_on_PointButton_button_down"]
+[connection signal="gui_input" from="PointButton" to="." method="_on_PointButton_gui_input"]
 [connection signal="button_down" from="Handle/HandleButton" to="." method="_on_HandleButton_button_down"]
 [connection signal="button_down" from="HandleMirror/MirrorButton" to="." method="_on_MirrorButton_button_down"]

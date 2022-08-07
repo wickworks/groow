@@ -6,6 +6,7 @@ export var startingHandle = Vector2.ZERO
 export var indexInCurve = 0
 
 signal updatedPointOrHandle
+signal deletePoint
 
 var draggingPoint = false
 var draggingHandle = false
@@ -62,8 +63,11 @@ func _on_HandleButton_button_down():
 func _on_MirrorButton_button_down():
 	draggingHandleMirror = true
 
-func _on_PointButton_button_down():
-	draggingPoint = true
 
-
-
+func _on_PointButton_gui_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == BUTTON_LEFT:
+			draggingPoint = true
+		elif event.button_index == BUTTON_RIGHT:
+			emit_signal("deletePoint", indexInCurve)
+			queue_free()

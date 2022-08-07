@@ -26,6 +26,7 @@ public class LongBezierCurve : Node2D
 		AddChild(point);
 		
 		point.Connect("updatedPointOrHandle", this, "UpdatePoint");
+		point.Connect("deletePoint", this, "DeletePoint");
 		
 		Update();
 	}
@@ -43,6 +44,21 @@ public class LongBezierCurve : Node2D
 		Update();
 	}
 	
+	private void DeletePoint(int idx)
+	{
+		_points.RemoveAt(idx);
+		_curve.RemovePoint(idx);
+		
+		// Need to tell all the points what their new index is.
+		for (int i = 0; i < _points.Count; i++) 
+		{
+			GD.Print(i);
+			_points[i].Call("setIndex", i);
+		}
+		
+		Update();
+	}
+	
 	public override void _Process(float delta)
 	{
 		//Update();
@@ -54,7 +70,6 @@ public class LongBezierCurve : Node2D
 		var points = _curve.Tessellate();
 		for (int i = 0; i < points.Length - 1; i++) 
 			DrawLine(points[i], points[i + 1], curveColor, curveWidth, true);
-
 	}
 
 }
